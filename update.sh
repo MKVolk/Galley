@@ -1,4 +1,4 @@
-```bash
+
 #!/data/data/com.termux/files/usr/bin/bash
 
 set -e
@@ -29,4 +29,3 @@ fi
 echo
 echo "Galley has been updated successfully!"
 echo "Run 'setupGLL' to start the setup script."
-```
