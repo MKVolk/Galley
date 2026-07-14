@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galley Termux Installer</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #121212;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      width: min(90%, 800px);
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.4);
+    }
+
+    h1 {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    p {
+      color: #ccc;
+      text-align: center;
+    }
+
+    textarea {
+      width: 100%;
+      height: 180px;
+      margin: 16px 0;
+      padding: 12px;
+      box-sizing: border-box;
+      font-family: monospace;
+      font-size: 14px;
+      border: none;
+      border-radius: 8px;
+      resize: vertical;
+      background: #2a2a2a;
+      color: #00ff88;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background: #00b86b;
+      color: white;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    button:hover {
+      background: #00995a;
+    }
+
+    #status {
+      margin-top: 12px;
+      text-align: center;
+      color: #7CFC98;
+      min-height: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Galley Installer</h1>
+    <p>Copy the command below and paste it into Termux.</p>
+
+    <textarea id="cmd" readonly>pkg update -y && pkg install -y git && git clone https://github.com/MKVolk/Galley.git ~/Galley && find ~/Galley -name '*.sh' -exec chmod +x {} \; && echo "alias setupGLL='bash ~/Galley/setup.sh'" >> ~/.bashrc && . ~/.bashrc</textarea>
+
+    <button id="copyBtn">📋 Copy Command</button>
+
+    <div id="status"></div>
+  </div>
+
+  <script>
+    const cmd = document.getElementById("cmd");
+    const status = document.getElementById("status");
+
+    document.getElementById("copyBtn").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(cmd.value);
+        status.textContent = "✅ Command copied to clipboard!";
+      } catch (err) {
+        cmd.select();
+        document.execCommand("copy");
+        status.textContent = "✅ Command copied to clipboard!";
+      }
+    });
+  </script>
+</body>
+</html>
