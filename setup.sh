@@ -40,9 +40,12 @@ pkg install -y python
 echo "Installing Termux API..."
 pkg install -y termux-api
 
-echo "Installing Python package: pyqr..."
-pip install --upgrade pip
-pip install pyqr
+echo "Installing Python package: qrcode..."
+#pip install --upgrade pip
+#pip install pyqr
+python -m pip install --upgrade setuptools wheel
+python -m pip install qrcode[pil]
+
 
 # ------------------------------------------------------
 # Create alias
