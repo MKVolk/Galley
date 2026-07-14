@@ -55,6 +55,14 @@ alias startGLL='python ~/Galley/simple_server.py'
 EOF
 fi
 
+if ! grep -q "alias updateGLL=" "$BASHRC"; then
+cat >> "$BASHRC" <<'EOF'
+
+# Galley Updater
+alias updateGLL='bash ~/Galley/update.sh'
+EOF
+fi
+
 # ------------------------------------------------------
 # Create prompt command
 # ------------------------------------------------------
