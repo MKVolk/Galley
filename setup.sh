@@ -34,6 +34,14 @@ pkg upgrade -y
 # ------------------------------------------------------
 # Install dependencies
 # ------------------------------------------------------
+pkg install -y \
+    clang \
+    make \
+    libjpeg-turbo \
+    libpng \
+    freetype \
+    zlib
+
 echo "Installing Python..."
 pkg install -y python
 
