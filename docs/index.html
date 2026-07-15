@@ -79,7 +79,7 @@
     <h1>Galley Installer</h1>
     <p>Copy the command below and paste it into Termux.</p>
 
-    <textarea id="cmd" readonly>pkg update -y && pkg install -y git && git clone https://github.com/MKVolk/Galley.git ~/Galley && find ~/Galley -name '*.sh' -exec chmod +x {} \; && echo "alias setupGLL='bash ~/Galley/setup.sh'" >> ~/.bashrc && . ~/.bashrc</textarea>
+    <textarea id="cmd" readonly>pkg update -y && pkg install -y git && git clone https://github.com/MKVolk/Galley.git ~/Galley && find ~/Galley -name '*.sh' -exec chmod +x {} \; && echo "alias setupGLL='bash ~/Galley/setup.sh'" >> ~/.bashrc && . ~/.bashrc && echo "Usa setupGLL para instalar Galley"</textarea>
 
     <button id="copyBtn">📋 Copy Command</button>
 
