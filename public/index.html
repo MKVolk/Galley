@@ -85,7 +85,7 @@
     <option value="./audio/sala8-es.opus">Sala 8</option>
   </select>
 
-  <audio id="audio" src="./audio/sala1-es.opus"></audio>
+  <audio id="audio" src="./audio/sala1-es.opus" preload="auto"></audio>
 
   <div class="controls">
     <button id="playPause">Play</button>
@@ -118,6 +118,32 @@ const progress = document.getElementById("progress");
 const volume = document.getElementById("volume");
 const trackSelect = document.getElementById("trackSelect");
 
+// Cache all audio files on startup
+const tracks = [
+    "./audio/sala1-es.opus",
+    "./audio/sala2-es.opus",
+    "./audio/sala3-es.opus",
+    "./audio/sala4-es.opus",
+    "./audio/sala5-es.opus",
+    "./audio/sala6-es.opus",
+    "./audio/sala7-es.opus",
+    "./audio/sala8-es.opus"
+];
+
+Promise.all(
+    tracks.map(url =>
+        fetch(url, { cache: "force-cache" })
+            .then(r => {
+                if (!r.ok) throw new Error(url);
+                return r.blob(); // consume response so it's fully downloaded
+            })
+    )
+).then(() => {
+    console.log("All audio files cached.");
+}).catch(err => {
+    console.error("Failed to cache:", err);
+});
+  
 // Change audio when dropdown changes
 trackSelect.addEventListener("change", () => {
     const wasPlaying = !audio.paused;
