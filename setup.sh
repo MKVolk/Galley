@@ -48,16 +48,20 @@ pkg install -y python
 echo "Installing Termux API..."
 pkg install -y termux-api
 
+echo "Installing termimage..."
+pkg install -y termimage
+
 echo "Installing Python package: qrcode..."
 #pip install --upgrade pip
 #pip install pyqr
 python -m pip install --upgrade setuptools wheel
 python -m pip install qrcode[pil]
 
-
 # ------------------------------------------------------
 # Create alias
 # ------------------------------------------------------
+
+# Galley Aliases
 if ! grep -q "alias startGLL=" "$BASHRC"; then
 cat >> "$BASHRC" <<'EOF'
 
@@ -71,6 +75,31 @@ cat >> "$BASHRC" <<'EOF'
 
 # Galley Updater
 alias updateGLL='bash ~/Galley/update.sh'
+EOF
+fi
+
+# IP aliases
+if ! grep -q "alias showIP=" "$BASHRC"; then
+cat >> "$BASHRC" <<'EOF'
+
+# ShowIP 
+alias showIP="ifconfig 2>/dev/null | grep inet | tail -1 |awk '{print \$2}'"
+EOF
+fi
+
+if ! grep -q "alias qrIP=" "$BASHRC"; then
+cat >> "$BASHRC" <<'EOF'
+
+# qrIP 
+alias qrIP='echo "http://$(showIP):8000" | qr --ascii'
+EOF
+fi
+
+if ! grep -q "alias qrIPB=" "$BASHRC"; then
+cat >> "$BASHRC" <<'EOF'
+
+# qrIPB big
+alias qrIPB='echo "http://$(showIP):8000" | qr > ~/currentIP.png && termimage ~/currentIP.png'
 EOF
 fi
 
